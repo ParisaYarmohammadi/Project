@@ -6,7 +6,7 @@ import '../SafeMath.sol';
 import "../Token.sol";
 
 
-contract StarkyCrowdsale {
+contract Crowdsale {
   using SafeMath for uint256;
   
   /* Contract Variables */
@@ -16,7 +16,7 @@ contract StarkyCrowdsale {
   uint256 public fundingCap;
   uint256 public deadline;
   
-  StarkyToken public tokenReward;
+  Token public tokenReward;
   uint256 public tokenPriceNumerator;
   uint256 public tokenPriceDenominator;
   string  public description;
