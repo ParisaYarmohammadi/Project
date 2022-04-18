@@ -2,15 +2,11 @@ pragma solidity ^0.4.11;
 
 
 import '../Ownable.sol';
-import '../StarkyToken.sol';
-import '../StarkyCrowdsale.sol';
+import '../Token.sol';
+import '../Crowdsale.sol';
 
 
-/**
- * @title StarkyDAO
- *
- * @dev DAO contract
- */
+
 contract StarkyDAO is Ownable{
   using SafeMath for uint;
 
