@@ -10,7 +10,7 @@ import "./BlockableToken.sol";
  *
  * @dev Simple ERC20 Token example, with crowdsale token creation and blocks for voting
  */
-contract StarkyToken is MintableToken, BlockableToken {
+contract Token is MintableToken, BlockableToken {
 
   string public constant name = "Token";
   string public constant symbol = "ST";
