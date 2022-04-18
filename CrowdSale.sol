@@ -3,14 +3,9 @@ pragma solidity ^0.4.8;
 
 
 import '../SafeMath.sol';
-import "../StarkyToken.sol";
+import "../Token.sol";
 
 
-/**
- * @title StarkyCrowdsale
- *
- * @dev Crowdsale contract
- */
 contract StarkyCrowdsale {
   using SafeMath for uint256;
   
