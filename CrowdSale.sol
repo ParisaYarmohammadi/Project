@@ -12,8 +12,8 @@ contract Crowdsale {
   /* Contract Variables */
   address public beneficiary;
   address public moderator;
-  uint256 public fundingGoal;
-  uint256 public fundingCap;
+  uint256 public softcap;
+  uint256 public hardCap;
   uint256 public deadline;
   
   Token public tokenReward;
