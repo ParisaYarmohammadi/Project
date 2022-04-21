@@ -12,7 +12,7 @@ contract Crowdsale {
   /* Contract Variables */
   address public beneficiary;
   address public moderator;
-  uint256 public softcap;
+  uint256 public softCap;
   uint256 public hardCap;
   uint256 public deadline;
   
@@ -45,8 +45,8 @@ contract Crowdsale {
    * @dev Token price: If want to give 0.1 tokens for 1 ETH - numerator 1, denominator 10
    * @param _crowdsaleBeneficiary  address The beneficiary of crowdsale
    * @param _crowdsaleModerator    address The moderator of crowdsale
-   * @param _fundingGoalInEthers   uint256 The target amount of ETh for the crowdsale
-   * @param _fundingCapInEthers    uint256 The maximum amount of ETh for the crowdsale
+   * @param _softCapInEthers       uint256 The target amount of ETh for the crowdsale
+   * @param _hardCapInEthers       uint256 The maximum amount of ETh for the crowdsale
    * @param _durationInMinutes     uint256 Maximum duration of the crowdsale
    * @param _tokenPriceNumerator   uint256 Numerator of the token price
    * @param _tokenPriceDenominator uint256 Denominator of the token price
@@ -56,8 +56,8 @@ contract Crowdsale {
   function StarkyCrowdsale (
     address _crowdsaleBeneficiary,
     address _crowdsaleModerator,
-    uint256 _fundingGoalInEthers,
-    uint256 _fundingCapInEthers,
+    uint256 _softCapInEthers,
+    uint256 _hardCapInEthers,
     uint256 _durationInMinutes,
     uint256 _tokenPriceNumerator,
     uint256 _tokenPriceDenominator,
@@ -66,8 +66,8 @@ contract Crowdsale {
   ) {
     beneficiary = _crowdsaleBeneficiary;
     moderator = _crowdsaleModerator;
-    fundingGoal = _fundingGoalInEthers * 1 ether;
-    fundingCap = _fundingCapInEthers * 1 ether;
+    fundingGoal = _softCapInEthers * 1 ether;
+    fundingCap = _hardCapInEthers * 1 ether;
     deadline = now + _durationInMinutes * 1 minutes;
     tokenPriceNumerator = _tokenPriceNumerator;
     tokenPriceDenominator = _tokenPriceDenominator;
@@ -95,20 +95,20 @@ contract Crowdsale {
    * @dev Finish the crowdsale
    */
   function finishCrowdsale() onlyRunningCrowdsale {
-    if (now < deadline && amountRaised < fundingGoal) {
+    if (now < deadline && amountRaised < softCap) {
       throw;
     }
-    else if (now >= deadline && amountRaised < fundingGoal) {
+    else if (now >= deadline && amountRaised < softCap) {
       crowdsaleState = CrowdsaleState.Failed;
       tokenReward.finishMinting();
       CrowdsaleSuccessful(false);
     }
-    else if (msg.sender == moderator && amountRaised >= fundingGoal) {
+    else if (msg.sender == moderator && amountRaised >= softCap) {
       crowdsaleState = CrowdsaleState.Success;
       tokenReward.finishMinting();
       CrowdsaleSuccessful(true);
     }
-    else if (amountRaised >= fundingCap) {
+    else if (amountRaised >= hardCap) {
       crowdsaleState = CrowdsaleState.Success;
       tokenReward.finishMinting();
       CrowdsaleSuccessful(true);
