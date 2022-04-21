@@ -62,7 +62,7 @@ contract Crowdsale {
     uint256 _tokenPriceNumerator,
     uint256 _tokenPriceDenominator,
     address _tokenRewardAddress,
-    string _description
+    string  _description
   ) {
     beneficiary = _crowdsaleBeneficiary;
     moderator = _crowdsaleModerator;
@@ -71,7 +71,7 @@ contract Crowdsale {
     deadline = now + _durationInMinutes * 1 minutes;
     tokenPriceNumerator = _tokenPriceNumerator;
     tokenPriceDenominator = _tokenPriceDenominator;
-    tokenReward = StarkyToken(_tokenRewardAddress);
+    tokenReward = Token(_tokenRewardAddress);
   }
 
   /* Contribution Function */
